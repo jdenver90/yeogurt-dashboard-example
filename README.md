@@ -1,10 +1,15 @@
 # yeogurt-dashboard-example
 
-An example of how to create a site dashboard within the [Yeogurt](https://github.com/larsonjj/generator-yeogurt) generator
+An example of how to create a site dashboard within the [Yeogurt](https://github.com/larsonjj/generator-yeogurt) generator.
 
 ## Usage
 
-Clone or copy into a yeogurt generated project.
+Copy files into a yeogurt generated project using cURL:
+
+```
+# Run this inside the root of your Yeogurt generated project
+curl -L https://github.com/larsonjj/yeogurt-dashboard-example/tarball/master | tar -xzv --strip-components 1 --exclude={README.md,LICENSE.md}
+```
 
 ## License
 
