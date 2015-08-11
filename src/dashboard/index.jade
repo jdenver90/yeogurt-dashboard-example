@@ -1,0 +1,59 @@
+extends ../_layouts/base
+
+//- Add in dashboard specific styles
+block append stylesheets
+  link(rel='stylesheet', href= config.baseUrl + 'styles/dashboard.css')
+
+block content
+  if site.data.dashboard
+    - var dash = site.data.dashboard
+    div.container.cf
+      div.dash-mobile-bar
+      div.sidebar
+        div.dash-button-wrapper
+          a.dash-nav-toggle(href='#')
+            span
+        div.scroll-wrapper
+          //- Category Filters
+          div.section-wrapper
+            h2.sidebar-title Categories
+            ul.sidebar-list
+              - var categoryItems = {}
+              each val, key in dash
+                unless categoryItems[val.category] === val.category
+                  li(
+                    class='#{val.category.toLowerCase() === "page" ? "active" : ""} #{val.category.toLowerCase()}',
+                    data-category=val.category
+                  )
+                    button.font-black(type='button')= val.name
+                  - categoryItems[val.category] = val.category
+          //- Status Filters
+          div.section-wrapper
+            h2.sidebar-title Legend
+            button.filter-clear.hide(type='button') Clear
+            ul.sidebar-list.legend
+              - var statusItems = {}
+              each val, key in dash
+                unless statusItems[val.status] === val.status
+                  li(class='#{val.status.toLowerCase()}' data-category=val.status.toLowerCase())
+                    button.font-black(type='button')= val.status
+                  - statusItems[val.status] = val.status
+
+      div.content
+        div.main-title
+          if logo
+            img(alt='Logo', width='200', src=logo)
+          else
+            h3 Logo
+
+        //- Dashboard list items
+        ul.item-list
+          each val, key in dash
+            li(class='#{val.category.toLowerCase()} #{val.status} #{val.category.toLowerCase() === "page" ? "" : "hide"}')
+              a(href=val.link)= val.name
+  else
+    h1 No dashboard data supplied!
+
+//- Add in dashboard specific scripts
+block append scripts
+  script(src= config.baseUrl + 'scripts/dashboard.js')
