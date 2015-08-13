@@ -30,25 +30,16 @@ block content
                     class='#{val.category.toLowerCase() === "page" ? "active" : ""} #{val.category}',
                     data-category=val.category
                   )
-                    button.font-black(type='button')= val.name
+                    button.font-black(type='button')= val.category
                   - categoryItems[val.category] = val.category
           //- Status Filters
           div.section-wrapper
-            h2.sidebar-title Status
+            h2.sidebar-title Statuses
             button.filter-clear.hide(type='button') Clear
             ul.sidebar-list.status
-              - var statusItems = {}
-              each val, key in dash
-                unless statusItems[val.status] === val.status
-                  li(class='#{val.status}' data-category=val.status)
-                    button(class='#{val.category}', type='button')= val.status
-                  - statusItems[val.status] = val.status
-            ul.available-statuses-list
-              if dash.statuses
-                each val, key in dash.statuses
-                  li.available-status-list-item
-                    span.available-status-color
-                    span.available-status-text(style='color: #{val.color}')= val.name
+              each val, key in dash.statuses
+                li(class='#{val.name}' data-category=val.name)
+                  button(class='#{val.name}', type='button')= val.name
 
       div.content
         div.main-logo
