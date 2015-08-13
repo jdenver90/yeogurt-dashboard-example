@@ -5,7 +5,7 @@ $(function() {
 
   var $itemItems = $('.item-list li');
   var $categoryItems = $('.category li');
-  var $legendItems = $('.legend li');
+  var $statusItems = $('.status li');
 
   var $clearButtons = $('.filter-clear');
 
@@ -41,8 +41,8 @@ $(function() {
     filterItems();
   };
 
-  var legendItemsClick = function() {
-    changeActiveItem($legendItems, 'active', $(this));
+  var statusItemsClick = function() {
+    changeActiveItem($statusItems, 'active', $(this));
     showClearButton($(this));
     filterItems();
   };
@@ -64,7 +64,7 @@ $(function() {
   };
 
   $categoryItems.on('click', catItemsClick);
-  $legendItems.on('click', legendItemsClick);
+  $statusItems.on('click', statusItemsClick);
   $clearButtons.on('click', clearButtonsClick);
   $menuButton.on('click', menuButtonClick);
 

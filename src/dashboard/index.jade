@@ -2,11 +2,16 @@ extends ../_layouts/base
 
 //- Add in dashboard specific styles
 block append stylesheets
-  link(rel='stylesheet', href= config.baseUrl + 'styles/dashboard.css')
+  - var dash = site.data.dashboard
+  link(rel='stylesheet', href= config.baseUrl + 'styles/main-dashboard.css')
+  style
+    if dash.statuses
+      each val, key in dash.statuses
+        |  .#{val.name} {color: #{val.color} !important; background-color: #{val.bgcolor} !important;}
 
 block content
-  if site.data.dashboard
-    - var dash = site.data.dashboard
+  - var dash = site.data.dashboard
+  if dash
     div.container.cf
       div.dash-mobile-bar
       div.sidebar
@@ -17,40 +22,44 @@ block content
           //- Category Filters
           div.section-wrapper
             h2.sidebar-title Categories
-            ul.sidebar-list
+            ul.sidebar-list.category
               - var categoryItems = {}
               each val, key in dash
                 unless categoryItems[val.category] === val.category
                   li(
-                    class='#{val.category.toLowerCase() === "page" ? "active" : ""} #{val.category.toLowerCase()}',
+                    class='#{val.category.toLowerCase() === "page" ? "active" : ""} #{val.category}',
                     data-category=val.category
                   )
                     button.font-black(type='button')= val.name
                   - categoryItems[val.category] = val.category
           //- Status Filters
           div.section-wrapper
-            h2.sidebar-title Legend
+            h2.sidebar-title Status
             button.filter-clear.hide(type='button') Clear
-            ul.sidebar-list.legend
+            ul.sidebar-list.status
               - var statusItems = {}
               each val, key in dash
                 unless statusItems[val.status] === val.status
-                  li(class='#{val.status.toLowerCase()}' data-category=val.status.toLowerCase())
-                    button.font-black(type='button')= val.status
+                  li(class='#{val.status}' data-category=val.status)
+                    button(class='#{val.category}', type='button')= val.status
                   - statusItems[val.status] = val.status
+            ul.available-statuses-list
+              if dash.statuses
+                each val, key in dash.statuses
+                  li.available-status-list-item
+                    span.available-status-color
+                    span.available-status-text(style='color: #{val.color}')= val.name
 
       div.content
-        div.main-title
-          if logo
-            img(alt='Logo', width='200', src=logo)
-          else
-            h3 Logo
+        div.main-logo
+            h3 [Logo]
 
         //- Dashboard list items
         ul.item-list
           each val, key in dash
-            li(class='#{val.category.toLowerCase()} #{val.status} #{val.category.toLowerCase() === "page" ? "" : "hide"}')
-              a(href=val.link)= val.name
+            unless key === 'statuses'
+              li(class='#{val.category} #{val.status} #{val.category.toLowerCase() === "page" ? "" : "hide"}')
+                a(href=val.link)= val.name
   else
     h1 No dashboard data supplied!
 

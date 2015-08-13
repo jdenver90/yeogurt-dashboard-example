@@ -58,7 +58,7 @@ ul {
   margin-right: auto;
   width: 100%;
 }
-.main-title {
+.main-logo {
   padding: 15px;
   text-align: center;
 }
@@ -187,32 +187,6 @@ ul {
     border-bottom: 4px solid #fff;
     height: 9px;
     margin: 0 13px;
-  }
-}
-li {
-  &.Development {
-    background: #94caeb;
-    color: #fff;
-  }
-  &.QA {
-    background: #eb9494;
-    color: #fff;
-  }
-  &.Blocked {
-    background: #e74c3c;
-    color: #fff;
-  }
-  &.Queued {
-    background: #c9c9c9;
-    color: #fff;
-  }
-  &.Review {
-    background: #8fbc23;
-    color: #fff;
-  }
-  &.Live {
-    background: #2a4a67;
-    color: #fff;
   }
 }
 .dash-button-wrapper {
